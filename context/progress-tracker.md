@@ -31,7 +31,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Architecture Decisions
 
-- Producer config: `bootstrap.servers=127.0.0.1:9092`, `StringSerializer` for key and value
+- Producer config: `bootstrap.servers=127.0.0.1:9092`, `StringSerializer` for key and value, `compression.type=snappy`, `linger.ms=20`, `batch.size=32768`
 - `BOOTSTRAP_SERVERS` and `TOPIC` are `private static final` class constants
 - Fire-and-forget send (no callback, no `.get()`)
 - Manual `producer.close()` in `finally` block
