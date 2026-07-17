@@ -2,7 +2,6 @@ package com.learning.kafka.wikimedia;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import com.launchdarkly.eventsource.ConnectStrategy;

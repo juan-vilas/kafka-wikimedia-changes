@@ -4,17 +4,20 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- SSE consumer integration
+- Multi-module Maven restructure; OpenSearch consumer scaffolding
 
 ## Current Goal
 
-- Wire the Wikimedia recentchanges SSE stream into the Kafka producer via an event handler
+- Set up `kafka-consumer-opensearch` module for future Kafka consumer → OpenSearch sink implementation
 
 ## Completed
 
 - `WikimediaChangesProducer` — sends "hello world" to topic `demo_java` via fire-and-forget, sleeps 10 minutes, then closes. Entry point is its own `main` method.
 - `WikimediaChangeHandler` — implements `BackgroundEventHandler` (okhttp-eventsource 4.1.0). Constructor takes a `KafkaProducer<String,String>` and topic. `onMessage` logs event data via SLF4J and sends it to Kafka; `onClosed` closes the producer; `onError` logs the throwable; `onOpen`/`onComment` are TODO stubs.
 - Added `slf4j-simple` 1.7.36 dependency for compile-scope SLF4J API and runtime log binding.
+- Restructured single-module project into multi-module Maven project: root `pom.xml` is now parent POM (`packaging=pom`) with `dependencyManagement` centralizing versions.
+- `kafka-producer-wikimedia` submodule — existing producer code (`WikimediaChangesProducer`, `WikimediaChangeHandler`, `Main`) moved here; pom inherits from parent.
+- `kafka-consumer-opensearch` submodule — empty module created with only `pom.xml` (inherits from parent, has `kafka-clients` + `slf4j-simple` deps). No Java source yet.
 
 ## In Progress
 
@@ -22,8 +25,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Next Up
 
-- Build the `EventSource` connecting to the Wikimedia recentchanges stream and register `WikimediaChangeHandler`
-- Replace hardcoded "hello world" with SSE consumer reading Wikimedia recentchanges stream
+- Implement Kafka consumer in `kafka-consumer-opensearch` that reads from the `demo_java` topic and indexes events into OpenSearch
 
 ## Open Questions
 
