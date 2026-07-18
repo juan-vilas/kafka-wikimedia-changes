@@ -18,7 +18,7 @@ public class WikimediaChangesProducer {
 
     private static final String URL = "https://stream.wikimedia.org/v2/stream/recentchange";
     private static final String BOOTSTRAP_SERVERS = "127.0.0.1:9092";
-    private static final String TOPIC = "demo_java";
+    private static final String TOPIC = "wikimedia.recentchange";
 
     public static void main(String[] args) {
         Properties properties = new Properties();

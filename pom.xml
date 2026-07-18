@@ -22,6 +22,8 @@
         <okhttp.version>4.12.0</okhttp.version>
         <okhttp-eventsource.version>4.1.0</okhttp-eventsource.version>
         <slf4j-simple.version>1.7.36</slf4j-simple.version>
+        <opensearch-rest-high-level-client.version>2.19.0</opensearch-rest-high-level-client.version>
+        <gson.version>2.11.0</gson.version>
     </properties>
 
     <dependencyManagement>
@@ -45,6 +47,16 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j-simple.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensearch.client</groupId>
+                <artifactId>opensearch-rest-high-level-client</artifactId>
+                <version>${opensearch-rest-high-level-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

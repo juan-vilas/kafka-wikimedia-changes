@@ -4,7 +4,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Multi-module Maven restructure; OpenSearch consumer scaffolding
+- OpenSearch consumer scaffolding; docker-compose for local OpenSearch
 
 ## Current Goal
 
@@ -18,6 +18,7 @@ Update this file whenever the current phase, active feature, or implementation s
 - Restructured single-module project into multi-module Maven project: root `pom.xml` is now parent POM (`packaging=pom`) with `dependencyManagement` centralizing versions.
 - `kafka-producer-wikimedia` submodule — existing producer code (`WikimediaChangesProducer`, `WikimediaChangeHandler`, `Main`) moved here; pom inherits from parent.
 - `kafka-consumer-opensearch` submodule — empty module created with only `pom.xml` (inherits from parent, has `kafka-clients` + `slf4j-simple` deps). No Java source yet.
+- `kafka-consumer-opensearch/docker-compose.yml` — single-node OpenSearch + OpenSearch Dashboards with security disabled. OpenSearch runs on http://localhost:9200, Dashboards on http://localhost:5601.
 
 ## In Progress
 
@@ -26,6 +27,10 @@ Update this file whenever the current phase, active feature, or implementation s
 ## Next Up
 
 - Implement Kafka consumer in `kafka-consumer-opensearch` that reads from the `demo_java` topic and indexes events into OpenSearch
+
+## Architecture Decisions
+
+- Docker: single-node OpenSearch (`discovery.type=single-node`) with security plugin disabled via `DISABLE_SECURITY_PLUGIN=true` + `DISABLE_INSTALL_DEMO_CONFIG=true` (official Docker env-var approach, not `plugins.security.disabled` in opensearch.yml). Dashboards security disabled via `DISABLE_SECURITY_DASHBOARDS_PLUGIN=true`. `OPENSEARCH_HOSTS` uses `http://` (not `https://`). `bootstrap.memory_lock=true` + memlock/nofile ulimits per official docs.
 
 ## Open Questions
 
